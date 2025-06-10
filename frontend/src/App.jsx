@@ -3,30 +3,35 @@ import { Routes, Route, Link } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Notes from "./pages/Notes";
+import Navbar from "./components/Navbar";
+import Groups from "./pages/Groups";
+import Home from "./pages/Home";
+import Tasks from "./pages/Tasks";
+import Resources from "./pages/Resources";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  //const userId = "YOUR_USER_ID"; // Replace with your MongoDB user's _id for now
-  const userId = "59b99db4cfa9a34dcd7885b6"; // mongodb user ID for testing purposes
-
-
+  const userId = "59b99db4cfa9a34dcd7885b6";
+  const isLoggedIn = !!localStorage.getItem("token");
   return (
     <div>
-      <nav>
-        <Link to="/login" style={{ marginRight: 16 }}>Login</Link>
-        <Link to="/register" style={{ marginRight: 16 }}>Register</Link>
-        <Link to="/notes">Notes</Link>
-      </nav>
+      <Navbar isLoggedIn={isLoggedIn} />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/notes" element={<Notes userId={userId} />} />
-        <Route path="/" element={<h1>Welcome Home!</h1>} />
+        <Route path="/groups" element={<Groups />} />
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
 }
 
 export default App;
+
 
 
 
