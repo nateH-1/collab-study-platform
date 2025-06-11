@@ -10,6 +10,7 @@ import Tasks from "./pages/Tasks";
 import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
 
+
 function App() {
   const userId = "59b99db4cfa9a34dcd7885b6";
   const isLoggedIn = !!localStorage.getItem("token");
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        
         <Route path="/notes" element={<Notes userId={userId} />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/tasks" element={<Tasks />} />
@@ -31,6 +33,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
