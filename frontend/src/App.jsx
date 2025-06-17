@@ -1,41 +1,38 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Notes from "./pages/Notes";
-import Navbar from "./components/Navbar";
-import Groups from "./pages/Groups";
-import Home from "./pages/Home";
-import Tasks from "./pages/Tasks";
-import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
-
+import SidebarLayout from "./layouts/SidebarLayout";
+import Tasks from "./pages/Tasks";
+import Notes from "./pages/Notes";
+import Groups from "./pages/Groups";
+import Resources from "./pages/Resources";
 
 function App() {
-  const userId = "59b99db4cfa9a34dcd7885b6";
   const isLoggedIn = !!localStorage.getItem("token");
+
   return (
-    <div>
-      <Navbar isLoggedIn={isLoggedIn} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        
-        <Route path="/notes" element={<Notes userId={userId} />} />
-        <Route path="/groups" element={<Groups />} />
+    <Routes>
+      {/* Public pages */}
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      {/* Protected dashboard pages */}
+      <Route
+        element={isLoggedIn ? <SidebarLayout /> : <Navigate to="/login" />}
+      >
         <Route path="/tasks" element={<Tasks />} />
+        <Route path="/notes" element={<Notes />} />
+        <Route path="/groups" element={<Groups />} />
         <Route path="/resources" element={<Resources />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+      </Route>
+
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
 export default App;
-
-
-
-
-
-
