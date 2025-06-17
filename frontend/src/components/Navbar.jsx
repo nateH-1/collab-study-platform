@@ -9,6 +9,7 @@ export default function Navbar({ isLoggedIn }) {
       >
         Home
       </Link>
+      
       <Link
         to="/notes"
         className="font-medium text-indigo-400 hover:text-indigo-600 transition-colors"
