@@ -18,8 +18,14 @@ mongoose.connect(process.env.MONGO_URI, {
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
+// Notes routes
 const notesRoutes = require('./routes/notes');
 app.use('/api/notes', notesRoutes);
+
+//  TASKS ROUTES -- ADD THIS SECTION:
+const tasksRoutes = require('./routes/tasks');
+app.use('/api/tasks', tasksRoutes);
+// END ADD
 
 // Root route
 app.get('/', (req, res) => res.send('API running'));
@@ -31,6 +37,3 @@ app.get('/api/test', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-
-
-
